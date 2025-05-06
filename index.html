@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StarPlay Gaming</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #0f172a;
+      color: white;
+    }
+    header {
+      background-color: #1e293b;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    nav {
+      text-align: center;
+      margin: 10px 0;
+    }
+    nav a {
+      color: #38bdf8;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+      background: url('https://images.unsplash.com/photo-1618773928121-c32242e4b870?auto=format&fit=crop&w=1050&q=80') no-repeat center center;
+      background-size: cover;
+    }
+    .hero h2 {
+      font-size: 2.5rem;
+      background-color: rgba(0,0,0,0.6);
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+    .section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .section h3 {
+      color: #38bdf8;
+      margin-bottom: 20px;
+    }
+    .services {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .card {
+      background-color: #1e293b;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 10px;
+      width: 250px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #1e293b;
+      margin-top: 40px;
+    }
+
+    /* Game Styling */
+    .game-container {
+      margin-top: 30px;
+    }
+    .button {
+      padding: 10px 20px;
+      background-color: #38bdf8;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 5px;
+      border-radius: 5px;
+    }
+    .color-box {
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      margin: 10px;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+    .spin-wheel {
+      border: 8px solid #38bdf8;
+      border-radius: 50%;
+      width: 200px;
+      height: 200px;
+      margin: 20px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: #f4f4f4;
+    }
+    .spin-wheel div {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform-origin: 50% 50%;
+      width: 10px;
+      height: 100px;
+      background-color: #38bdf8;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>StarPlay Gaming</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#services">Games</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Play. Predict. Win Big.</h2>
+  </section>
+
+  <section class="section" id="about">
+    <h3>About Us</h3>
+    <p>StarPlay is a fast-growing gaming platform offering thrilling prediction games, lucky draws, and more! Join and win real rewards.</p>
+  </section>
+
+  <section class="section" id="services">
+    <h3>Popular Games</h3>
+    <!-- Color Prediction Game -->
+    <div class="game-container">
+      <h2>Color Prediction Game</h2>
+      <p>Choose a color to predict</p>
+      <div class="color-box" style="background-color: red;" onclick="predictColor('red')"></div>
+      <div class="color-box" style="background-color: blue;" onclick="predictColor('blue')"></div>
+      <div class="color-box" style="background-color: green;" onclick="predictColor('green')"></div>
+      <p id="prediction-result"></p>
+    </div>
+
+    <!-- Lucky Spin Game -->
+    <div class="game-container">
+      <h2>Lucky Spin</h2>
+      <div class="spin-wheel" id="wheel">
+        <div id="wheel-section"></div>
+      </div>
+      <button class="button" onclick="spinWheel()">Spin the Wheel</button>
+      <p id="spin-result"></p>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <h3>Contact Us</h3>
+    <p>Email: support@starplaygames.com</p>
+    <p>WhatsApp: +91 90000 00000</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 StarPlay Gaming. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Color Prediction Game
+    function predictColor(selectedColor) {
+      const colors = ['red', 'blue', 'green'];
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      const resultText = (selectedColor === randomColor) ? "You Win!" : "Try Again!";
+      document.getElementById('prediction-result').textContent = `The system chose ${randomColor}. ${resultText}`;
+    }
+
+    // Lucky Spin Game
+    function spinWheel() {
+      const wheel = document.getElementById('wheel');
+      const sections = ['Red', 'Blue', 'Green', 'Yellow', 'Purple', 'Orange'];
+      const randomIndex = Math.floor(Math.random() * sections.length);
+      const rotation = 360 * 3 + (randomIndex * 60);
+      wheel.style.transition = 'transform 3s ease-out';
+      wheel.style.transform = `rotate(${rotation}deg)`;
+
+      setTimeout(() => {
+        document.getElementById('spin-result').textContent = `The wheel landed on ${sections[randomIndex]}!`;
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
